@@ -1,8 +1,11 @@
-FROM lipanski/docker-static-website:latest
+FROM python:alpine
 
 EXPOSE 3000
 
-# Copy your static files
+RUN mkdir -p /srv/www
+
+WORKDIR /src/www
+
 COPY public .
 
-CMD ["/busybox", "httpd", "-f", "-v", "-p", "3000", "-c", "httpd.conf"]
+CMD ["python", "-m", "http.server", "3000"]
